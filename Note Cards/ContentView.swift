@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isfillped = false
     @State private var addCards = false
     var body: some View {
         NavigationView {
