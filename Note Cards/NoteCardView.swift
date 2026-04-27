@@ -11,42 +11,43 @@ struct NoteCardView: View {
     @State private var question: String
     @State private var answer: String
     @State private var showAnswer = false
-    
     init(question: String, answer: String) {
         self._question = State(initialValue: question)
         self._answer = State(initialValue: answer)
     }
-    
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             ZStack {
-                // Control for the rectangle "note card"
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color.blue.opacity(0.2))
                     .frame(width: 350, height: 200)
-                Text(showAnswer ? answer : question)
-                    .font(.title)
-                    .foregroundColor(.black)
-                    .padding()
+
+                if showAnswer {
+                    Text(answer)
+                        .font(.title)
+                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                } else {
+                    Text(question)
+                        .font(.title)
+                }
             }
             .rotation3DEffect(
-                .degrees(showAnswer ? 360 : 0),
-                axis : (x:0, y: 1, z: 0)
+                .degrees(showAnswer ? 180 : 0),
+                axis: (x: 0, y: 1, z: 0)
             )
-            // broken but will fix 
-            .animation(.easeIn(duration: 0.6),value: showAnswer)
+            .animation(.easeInOut(duration: 0.5), value: showAnswer)
             .onTapGesture {
                 showAnswer.toggle()
             }
-            TextField("test", text: $question)
+            TextField("Enter question", text: $question)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("answer here", text: $answer)
+
+            TextField("Enter answer", text: $answer)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
         }
-       
+        .padding()
     }
 }
-
 #Preview {
     NoteCardView(question: "", answer: "")
 }

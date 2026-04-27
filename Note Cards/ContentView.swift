@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @State private var addCards = false
     @State private var cardSet = NoteCardView(question: "", answer: "")
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -20,16 +19,20 @@ struct ContentView: View {
             }
             
             .navigationBarTitle("Note Card Sets", displayMode: .inline)
-            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
-                addCards = true
-            }, label: {
-                Image(systemName: "plus")
-            }))
-                
-            }
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing: Button(action: {
+                    addCards = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+        }
+        .sheet(isPresented: $addCards) {
+            NoteCardView(question: "", answer: "")
         }
     }
-
+}
 
 #Preview {
     ContentView()
