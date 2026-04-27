@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var addCards = false
+    @State private var cardSet = NoteCardView(question: "", answer: "")
+    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    
                 }
                 // incase needed
             }

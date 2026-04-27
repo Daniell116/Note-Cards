@@ -20,9 +20,10 @@ struct NoteCardView: View {
     var body: some View {
         VStack {
             ZStack {
-                RoundedRectangle(cornerRadius: 20)
+                // Control for the rectangle "note card"
+                RoundedRectangle(cornerRadius: 30)
                     .fill(Color.blue.opacity(0.2))
-                    .frame(height: 200)
+                    .frame(width: 350, height: 200)
                 Text(showAnswer ? answer : question)
                     .font(.title)
                     .foregroundColor(.black)
@@ -39,7 +40,7 @@ struct NoteCardView: View {
             }
             TextField("test", text: $question)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            TextField("ansewr here", text: $answer)
+            TextField("answer here", text: $answer)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
         }
        
