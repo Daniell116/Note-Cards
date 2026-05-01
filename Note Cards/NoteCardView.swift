@@ -8,13 +8,9 @@
 import SwiftUI
 
 struct NoteCardView: View {
-    @State private var question: String
-    @State private var answer: String
+    @Binding var question: String
+    @Binding var answer: String
     @State private var showAnswer = false
-    init(question: String, answer: String) {
-        self._question = State(initialValue: question)
-        self._answer = State(initialValue: answer)
-    }
     var body: some View {
         VStack(spacing: 20) {
             ZStack {
@@ -39,15 +35,21 @@ struct NoteCardView: View {
             .onTapGesture {
                 showAnswer.toggle()
             }
-            TextField("Enter question", text: $question)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
 
+            TextField("Enter question", text: $question)
             TextField("Enter answer", text: $answer)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
         }
         .padding()
     }
 }
 #Preview {
-    NoteCardView(question: "", answer: "")
+    NoteCardView(
+        question: .constant("Question"),
+        answer: .constant("Answer")
+    )
+}
+struct Card: Identifiable {
+    let id = UUID()
+    var question: String
+    var answer: String
 }

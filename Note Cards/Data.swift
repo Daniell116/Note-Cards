@@ -7,13 +7,15 @@
 import Foundation
 
 struct FlashCard: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     var front: String
     var back: String
 }
 
 struct FlashCardSet: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     var name: String
     var cards: [FlashCard]
 }
+
+

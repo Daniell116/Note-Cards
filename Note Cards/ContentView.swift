@@ -9,28 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var addCards = false
-    @State private var cardSet = NoteCardView(question: "", answer: "")
+    @State private var cards: [Card] = []
     var body: some View {
         NavigationView {
             VStack {
                 List {
+                    ForEach($cards) { $card in
+                        NoteCardView(question: $card.question, answer: $card.answer)
+                    }
                 }
-                // incase needed
             }
             
             .navigationBarTitle("Note Card Sets", displayMode: .inline)
-            .navigationBarItems(
-                leading: EditButton(),
-                trailing: Button(action: {
-                    addCards = true
-                }) {
+            .toolbar {
+                Button {
+                    cards.append(Card(question: "", answer: ""))
+                } label: {
                     Image(systemName: "plus")
                 }
-            )
+            }
         }
-        .sheet(isPresented: $addCards) {
-            NoteCardView(question: "", answer: "")
-        }
+       
     }
 }
 
