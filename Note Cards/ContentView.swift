@@ -14,6 +14,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List {
+                    // create each card
                     ForEach($cards) { $card in
                         NoteCardView(question: $card.question, answer: $card.answer)
                     }
