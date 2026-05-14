@@ -8,13 +8,13 @@ import Foundation
 
 struct FlashCard: Identifiable, Codable {
     var id = UUID()
-    var front: String
-    var back: String
+    var question: String
+    var answer: String
 }
 
-struct FlashCardSet: Identifiable, Codable {
+struct CardGroup: Identifiable, Codable {
     var id = UUID()
-    var name: String
+    var title: String
     var cards: [FlashCard]
 }
 

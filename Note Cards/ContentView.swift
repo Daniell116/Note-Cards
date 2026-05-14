@@ -9,31 +9,45 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var addCards = false
-    @State private var cards: [Card] = []
+    @State private var groups: [CardGroup] = []
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    // create each card
-                    ForEach($cards) { $card in
-                        NoteCardView(question: $card.question, answer: $card.answer)
+                    ForEach($groups) { $group in
+                        NavigationLink {
+                            GroupDetailView(group: $group)
+                        } label: {
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text(group.title)
+                                    .font(.headline)
+                                
+                                Text("\(group.cards.count) cards")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                }
+                
+                .navigationBarTitle("Note Card Sets", displayMode: .inline)
+                .toolbar {
+                    Button {
+                        groups.append(
+                            CardGroup(
+                                title: "New Set",
+                                cards: []))
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
             }
             
-            .navigationBarTitle("Note Card Sets", displayMode: .inline)
-            .toolbar {
-                Button {
-                    cards.append(Card(question: "", answer: ""))
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
         }
-       
     }
 }
-
 #Preview {
     ContentView()
 }
