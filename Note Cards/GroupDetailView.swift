@@ -36,34 +36,38 @@ struct GroupDetailView: View {
                         .padding()
                     }
                 }
+                
                 VStack {
-                    TextField("Question", text: $group.cards[0].question)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("Answer", text: $group.cards[0].answer)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    if $group.cards.indices.contains(0) {
+                        TextField("Question", text: $group.cards[0].question)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        TextField("Answer", text: $group.cards[0].answer)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
                 }
                 .padding()
                 .background(Color.blue.opacity(0.05))
                 .cornerRadius(10)
                 .padding(.horizontal)
+                
+                Button(action: {
+                    let newCard = FlashCard(question: "", answer: "")
+                    group.cards.append(newCard)
+                }) {
+                    Text("Add New Card")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                
             }
-            Button(action: {
-                let newCard = FlashCard(question: "", answer: "")
-                group.cards.append(newCard)
-            }) {
-                Text("Add New Card")
-                    .fontWeight(.bold)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding()
-            
+            .navigationTitle("Edit Cards")
         }
-        .navigationTitle("Edit Cards")
     }
 }
 #Preview {
@@ -77,5 +81,6 @@ struct GroupDetailView: View {
                 )
             ]
         )
-    ) )
+    )
+)
 }
