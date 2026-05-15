@@ -37,19 +37,21 @@ struct GroupDetailView: View {
                     }
                 }
                 
-                VStack {
-                    if $group.cards.indices.contains(0) {
-                        TextField("Question", text: $group.cards[0].question)
+                ForEach($group.cards) { $card in
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        TextField("Question", text: $card.question)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                         
-                        TextField("Answer", text: $group.cards[0].answer)
+                        TextField("Answer", text: $card.answer)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     }
+                    .padding()
+                    .background(Color.blue.opacity(0.05))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 15)
                 }
-                .padding()
-                .background(Color.blue.opacity(0.05))
-                .cornerRadius(10)
-                .padding(.horizontal)
                 
                 Button(action: {
                     let newCard = FlashCard(question: "", answer: "")
@@ -64,6 +66,17 @@ struct GroupDetailView: View {
                         .cornerRadius(10)
                 }
                 .padding()
+                
+                NavigationLink(destination: StudyView(cards: $group.cards)) {
+                    Text("Study All")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
                 
             }
             .navigationTitle("Edit Cards")

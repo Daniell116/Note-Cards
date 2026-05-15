@@ -24,7 +24,7 @@ struct FlashCardView: View {
                     showAnswer.toggle()
                 }
             
-            Text("Tap the card to flip it")
+            Text("Tap the card to flip ")
                 .padding()
             Spacer()
         }
@@ -36,3 +36,5 @@ struct FlashCardView: View {
         answer: ""
     ))
 }
+
+

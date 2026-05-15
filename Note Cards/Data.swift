@@ -10,6 +10,7 @@ struct FlashCard: Identifiable, Codable {
     var id = UUID()
     var question: String
     var answer: String
+    var known: Bool? = nil
 }
 
 struct CardGroup: Identifiable, Codable {
@@ -17,5 +18,6 @@ struct CardGroup: Identifiable, Codable {
     var title: String
     var cards: [FlashCard]
 }
+
 
 
