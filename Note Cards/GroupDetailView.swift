@@ -20,6 +20,31 @@ struct GroupDetailView: View {
                 TextField("Enter title...", text: $group.title)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal)
+                
+                NavigationLink(destination: StudyView(cards: group.cards)) {
+
+                    Text("Study All")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                Button(action: {
+                    let newCard = FlashCard(question: "", answer: "")
+                    group.cards.append(newCard)
+                }) {
+                    Text("Add New Card")
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                
                 Divider()
                 ForEach(group.cards) { card in
                     
@@ -53,30 +78,9 @@ struct GroupDetailView: View {
                     .padding(.bottom, 15)
                 }
                 
-                Button(action: {
-                    let newCard = FlashCard(question: "", answer: "")
-                    group.cards.append(newCard)
-                }) {
-                    Text("Add New Card")
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                .padding()
                 
-                NavigationLink(destination: StudyView(cards: $group.cards)) {
-                    Text("Study All")
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
                 .padding(.horizontal)
+                .padding()
                 
             }
             .navigationTitle("Edit Cards")

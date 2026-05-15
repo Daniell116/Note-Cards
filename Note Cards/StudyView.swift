@@ -8,47 +8,66 @@
 import SwiftUI
 
 struct StudyView: View {
-    @Binding var cards: [FlashCard]
+    let cards: [FlashCard]
     @State private var currentIndex = 0
     var body: some View {
-        VStack(spacing: 30) {
-            FlashCardView(card: cards[currentIndex])
-            HStack(spacing: 20) {
-                Button("Don't Know") {
-                    cards[currentIndex].known = false
+        
+        if cards.indices.contains(currentIndex) {
+            
+            VStack(spacing: 30) {
+                
+                FlashCardView(card: cards[currentIndex])
+                
+                HStack(spacing: 20) {
+                    
+                    Button("Don't Know") {
+                        nextCard()
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    
+                    Button("Know") {
+                        nextCard()
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Button("Know") {
-                    cards[currentIndex].known = true
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-            }
-            HStack {
-                Button("Previous") {
-                    if currentIndex > 0 {
-                        currentIndex -= 1
+                
+                HStack {
+                    
+                    Button("Previous") {
+                        if currentIndex > 0 {
+                            currentIndex -= 1
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Text("\(currentIndex + 1) / \(cards.count)")
+                    
+                    Spacer()
+                    
+                    Button("Next") {
+                        nextCard()
                     }
                 }
-                Spacer()
-                Text("\(currentIndex + 1) / \(cards.count)")
-                Spacer()
-                Button("Next") {
-                    if currentIndex < cards.count - 1 {
-                        currentIndex += 1
-                    }
-                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+            .padding()
+            
+        } else {
+            Text("No cards available")
         }
-        .padding()
+    }
+    func nextCard() {
+        if currentIndex < cards.count - 1 {
+            currentIndex += 1
+        }
     }
 }
