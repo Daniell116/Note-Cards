@@ -11,15 +11,11 @@ struct StudyView: View {
     let cards: [FlashCard]
     @State private var currentIndex = 0
     var body: some View {
-        
         if cards.indices.contains(currentIndex) {
-            
             VStack(spacing: 30) {
-                
                 FlashCardView(card: cards[currentIndex])
-                
                 HStack(spacing: 20) {
-                    
+                    //help you decide if you know or dont know the cards
                     Button("Don't Know") {
                         nextCard()
                     }
@@ -28,7 +24,6 @@ struct StudyView: View {
                     .background(Color.red)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    
                     Button("Know") {
                         nextCard()
                     }
@@ -38,33 +33,28 @@ struct StudyView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
-                
+                // gives the user to go back if they need to
                 HStack {
-                    
                     Button("Previous") {
                         if currentIndex > 0 {
                             currentIndex -= 1
                         }
                     }
-                    
                     Spacer()
-                    
                     Text("\(currentIndex + 1) / \(cards.count)")
-                    
                     Spacer()
-                    
+                    // moves on to the rest cards
                     Button("Next") {
                         nextCard()
                     }
                 }
-                .padding(.horizontal)
             }
-            .padding()
-            
+            // only shows if there are no cards made
         } else {
             Text("No cards available")
         }
     }
+    // moves you to the next card if you know or dont know
     func nextCard() {
         if currentIndex < cards.count - 1 {
             currentIndex += 1

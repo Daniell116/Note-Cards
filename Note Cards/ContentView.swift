@@ -14,16 +14,15 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 List {
+                    // shows each group of cards made from the user
                     ForEach($groups) { $group in
                         NavigationLink {
                             GroupDetailView(group: $group)
                         } label: {
-                            
+                            // shows the tile of the card alongside the amount of cards are in the set
                             VStack(alignment: .leading) {
-                                
                                 Text(group.title)
                                     .font(.headline)
-                                
                                 Text("\(group.cards.count) cards")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
@@ -31,7 +30,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                
                 .navigationBarTitle("Note Card Sets", displayMode: .inline)
                 .toolbar {
                     Button {

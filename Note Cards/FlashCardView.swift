@@ -36,5 +36,3 @@ struct FlashCardView: View {
         answer: ""
     ))
 }
-
-

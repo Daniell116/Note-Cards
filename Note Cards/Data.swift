@@ -6,6 +6,7 @@
 //
 import Foundation
 
+// Helps with structs and identify them in other views
 struct FlashCard: Identifiable, Codable {
     var id = UUID()
     var question: String
