@@ -14,7 +14,7 @@ struct StudyView: View {
         if cards.indices.contains(currentIndex) {
             VStack(spacing: 30) {
                 FlashCardView(card: cards[currentIndex])
-                HStack(spacing: 20) {
+                HStack(spacing: 10) {
                     //help you decide if you know or dont know the cards
                     Button("Don't Know") {
                         nextCard()
@@ -40,9 +40,7 @@ struct StudyView: View {
                             currentIndex -= 1
                         }
                     }
-                    Spacer()
                     Text("\(currentIndex + 1) / \(cards.count)")
-                    Spacer()
                     // moves on to the rest cards
                     Button("Next") {
                         nextCard()
